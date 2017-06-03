@@ -64,10 +64,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             timePickerDialog.show();
         }
         if (v == btnPanchang) {
-            double hour = mHour + mMinute/60;
-            Calendar mCalendar = new GregorianCalendar();
-            TimeZone mTimeZone = mCalendar.getTimeZone();
-            int mGMTOffset = mTimeZone.getRawOffset();
+            double hour = mHour + (double)mMinute/60;
+            TimeZone mTimeZone = TimeZone.getDefault();
+            int mGMTOffset = mTimeZone.getOffset(Calendar.ZONE_OFFSET);
             double zHour = (TimeUnit.MINUTES.convert(mGMTOffset, TimeUnit.MILLISECONDS))/60;
             Panchanga  panchanga = panchang.calculatePanchanga(mDay,mMonth,mYear,hour,zHour);
             TextView textView =(TextView) findViewById(R.id.address1);
