@@ -153,7 +153,6 @@ public class Panchang {
         Panchanga p = new Panchanga();
         double d, ayanamsa, slon, mlon, tmlon, tslon;
         int n;
-
         String inputDateStr = String.format("%s/%s/%s", dd, mm, yy);
         Date inputDate = null;
         try {
@@ -164,7 +163,7 @@ public class Panchang {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(inputDate);
         String dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.US).toUpperCase();
-        p.dtoday = dayOfWeek;
+        p.setDtoday(dayOfWeek);
 
 
         //Calculate day number since 2000 Jan 0.0 TDT
@@ -179,29 +178,23 @@ public class Panchang {
         tmlon = mlon+((mlon<slon)?360:0);
         tslon = slon;
         n = (int)((tmlon-tslon)/12);
-        p.dtithi = tithi[n];
+        p.setDtithi(tithi[n]);
 
         if(n<=14)
         {
-            p.dpaksha = "Shukla";
+            p.setDpaksha("Shukla");
         }
         else
         {
-            p.dpaksha = "Krishna";
+            p.setDpaksha("Krishna");
         }
-
-
         //Calculate Nakshatra
         tmlon = REV(mlon+ayanamsa);
-        p.dnakshatra = nakshatra[(int)(tmlon*6/80)];
-
-
+        p.setDnakshatra(nakshatra[(int)(tmlon*6/80)]);
         //Calculate Yoga
         tmlon = mlon+ayanamsa;
         tslon = slon+ayanamsa;
-        p.dyoga = yoga[(int)(REV(tmlon+tslon)*6/80)];
-
-
+        p.setDyoga(yoga[(int)(REV(tmlon+tslon)*6/80)]);
         //Calculate Karana
         tmlon = mlon+((mlon<slon)?360:0);
         tslon = slon;
@@ -210,10 +203,10 @@ public class Panchang {
         if(n>=57) n-=50;
         if(n>0 && n<57) n=(n-1)-((n-1)/7*7);
 
-        p.dkarana = karan[n];
+        p.setDkarana(karan[n]);
         //Calculate the rashi in which the moon is present
         tmlon = REV(mlon+ayanamsa);
-        p.drashi = rashi[(int)(tmlon/30)];
+        p.setDrashi(rashi[(int)(tmlon/30)]);
         return p;
     }
 }

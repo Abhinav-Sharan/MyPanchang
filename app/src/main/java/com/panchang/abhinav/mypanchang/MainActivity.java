@@ -27,8 +27,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mYear = c.get(Calendar.YEAR);
             mMonth = c.get(Calendar.MONTH);
             mDay = c.get(Calendar.DAY_OF_MONTH);
-
-
             DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                     new DatePickerDialog.OnDateSetListener() {
 
@@ -58,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         @Override
                         public void onTimeSet(TimePicker view, int hourOfDay,
                                               int minute) {
-
                             txtTime.setText(hourOfDay + ":" + minute);
                             mHour = hourOfDay;
                             mMinute = minute;
@@ -88,7 +85,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         txtTime=(EditText)findViewById(R.id.in_time);
 
         btnPanchang =(Button)findViewById(R.id.btn_find_panchang);
-
         btnDatePicker.setOnClickListener(this);
         btnTimePicker.setOnClickListener(this);
         btnPanchang.setOnClickListener(this);
