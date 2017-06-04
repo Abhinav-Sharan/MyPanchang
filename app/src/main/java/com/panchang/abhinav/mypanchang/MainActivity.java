@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v == btnPanchang) {
             double hour = mHour + (double)mMinute/60;
             TimeZone mTimeZone = TimeZone.getDefault();
-            int mGMTOffset = mTimeZone.getOffset(Calendar.ZONE_OFFSET);
+            int mGMTOffset = mTimeZone.getRawOffset();
             double zHour = (TimeUnit.MINUTES.convert(mGMTOffset, TimeUnit.MILLISECONDS))/60;
             Panchanga  panchanga = panchang.calculatePanchanga(mDay,mMonth,mYear,hour,zHour);
             TextView textView =(TextView) findViewById(R.id.address1);
